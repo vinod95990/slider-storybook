@@ -6,7 +6,6 @@ import { SliderSubtype, SliderType } from "./constants/sliderConstants";
 function App() {
   return (
     <div
-      className=""
       style={{
         display: "flex",
         flexDirection: "column",

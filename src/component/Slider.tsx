@@ -72,7 +72,7 @@ const Slider: React.FC<SliderProps> = ({ type, subType, noOfSteps, size }) => {
 
   return (
     <div>
-      <div className="flex items-center justify-center gap-24">
+      <div  >
         {getSliderBasedOnType(type, subType)}
       </div>
     </div>
