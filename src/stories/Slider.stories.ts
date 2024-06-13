@@ -26,6 +26,7 @@ const meta = {
       control: "select",
       options: [24, 32],
     },
+    onSlide: { action: "changed" },
   },
   args: {
     type: SliderType.Continous,

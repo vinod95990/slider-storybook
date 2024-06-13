@@ -7,10 +7,11 @@ interface MultiRangeSliderProps {
   max: number;
   type: SliderType;
   size: number;
-  noOfSteps?: any;
+  noOfSteps?: any; onSlide?: (value: any) => void;
+
 }
 
-const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, size, noOfSteps }) => {
+const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, size, noOfSteps, onSlide }) => {
   const [minVal, setMinVal] = useState<number>(min);
   const [maxVal, setMaxVal] = useState<number>(max);
   const [inputTrackSteps, setInputTrackSteps] = useState<JSX.Element[]>([]);
@@ -95,6 +96,8 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
               onChange={(event) => {
                 const value = Math.min(Number(event.target.value), maxVal - 1);
                 setMinVal(value);
+                if (onSlide) onSlide({ event, minValue: value, maxValue: maxVal });
+
               }}
               className={`thumb thumb--left ${size == 24 ? "thumb-size-24" : "thumb-size-32"
                 }`}
@@ -108,6 +111,8 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
               onChange={(event) => {
                 const value = Math.max(Number(event.target.value), minVal + 1);
                 setMaxVal(value);
+                if (onSlide) onSlide({ event, minValue: minVal, maxValue: value });
+
               }}
               className={`thumb thumb--right ${size == 24 ? "thumb-size-24" : "thumb-size-32"
                 }`}
@@ -129,9 +134,13 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
               value={minVal}
               step={noOfSteps}
               onChange={(event) => {
-                const value = Math.min(Number(event.target.value), maxVal - 4);
+                if (maxVal - Number(event.target.value) >= noOfSteps) {
+                  const value = Math.min(Number(event.target.value), maxVal - 4);
 
-                setMinVal(value);
+                  if (onSlide) onSlide({ event, minValue: value, maxValue: maxVal });
+
+                  setMinVal(value);
+                }
               }}
               className={`thumb thumb--left ${size == 24 ? "thumb-size-24" : "thumb-size-32"
                 }`}
@@ -144,9 +153,14 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
               value={maxVal}
               step={noOfSteps}
               onChange={(event) => {
-                const value = Math.max(Number(event.target.value), minVal + 4);
 
-                setMaxVal(value);
+                if (Number(event.target.value) - minVal >= noOfSteps) {
+
+                  const value = Math.max(Number(event.target.value), minVal + 4);
+                  if (onSlide) onSlide({ event, minValue: minVal, maxValue: value });
+
+                  setMaxVal(value);
+                }
               }}
               className={`thumb thumb--right ${size == 24 ? "thumb-size-24" : "thumb-size-32"
                 }`}

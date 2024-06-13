@@ -7,9 +7,10 @@ interface SliderProps {
   subType: SliderSubtype;
   noOfSteps?: number;
   size: 24 | 32;
+  onSlide?: (value: any) => void;
 }
 
-const Slider: React.FC<SliderProps> = ({ type, subType, noOfSteps, size }) => {
+const Slider: React.FC<SliderProps> = ({ type, subType, noOfSteps, size, onSlide }) => {
   // const { type, subType, noOfSteps, size } = props;
 
   function getSliderBasedOnType(type: SliderType,
@@ -25,6 +26,7 @@ const Slider: React.FC<SliderProps> = ({ type, subType, noOfSteps, size }) => {
                 max={20}
                 type={SliderType.Continous} // discrete or continous
                 size={size} // 24 or 32, by default 32 size is applied
+                onSlide={onSlide}
 
               />
             );
@@ -37,6 +39,7 @@ const Slider: React.FC<SliderProps> = ({ type, subType, noOfSteps, size }) => {
                 max={20}
                 type={SliderType.Continous}
                 size={size} // 24 or 32, by default 32 size is applied
+                onSlide={onSlide}
               />
             );
         }
@@ -51,7 +54,7 @@ const Slider: React.FC<SliderProps> = ({ type, subType, noOfSteps, size }) => {
                 type={SliderType.Discrete} // discrete or continous
                 size={size} // 24 or 32, by default 32 size is applied
                 noOfSteps={noOfSteps} // if discrete, steps inc
-
+                onSlide={onSlide}
               />
             );
 
@@ -64,6 +67,7 @@ const Slider: React.FC<SliderProps> = ({ type, subType, noOfSteps, size }) => {
                 type={SliderType.Discrete} // discrete or continous
                 size={size} // 24 or 32, by default 32 size is applied
                 noOfSteps={noOfSteps}
+                onSlide={onSlide}
               />
             );
         }

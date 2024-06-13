@@ -8,9 +8,10 @@ interface SingleSliderProps {
   type: SliderType;
   size: number;
   noOfSteps?: number;
+  onSlide?: (value: any) => void;
 }
 
-const SingleSlider: React.FC<SingleSliderProps> = ({ min, max, type, size, noOfSteps }) => {
+const SingleSlider: React.FC<SingleSliderProps> = ({ min, max, type, size, noOfSteps, onSlide }) => {
   const [value, setValue] = useState<number>(0);
   const sliderRef = useRef<HTMLDivElement>(null);
   const [inputTrackSteps, setInputTrackSteps] = useState([]);
@@ -73,6 +74,7 @@ const SingleSlider: React.FC<SingleSliderProps> = ({ min, max, type, size, noOfS
               onChange={(event) => {
                 const value = Number(event.target.value);
                 setValue(value);
+                if (onSlide) onSlide({ event, value });
               }}
               className={`thumb ${size === 24 ? "thumb-size-24" : "thumb-size-32"
                 }`}
@@ -95,6 +97,8 @@ const SingleSlider: React.FC<SingleSliderProps> = ({ min, max, type, size, noOfS
               onChange={(event) => {
                 const value = Number(event.target.value);
                 setValue(value);
+                if (onSlide) onSlide({ event, value });
+
               }}
               className={`thumb ${size === 24 ? "thumb-size-24" : "thumb-size-32"
                 }`}
