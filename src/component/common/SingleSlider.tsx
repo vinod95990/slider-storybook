@@ -18,7 +18,7 @@ const SingleSlider: React.FC<SingleSliderProps> = ({ min, max, type, size, noOfS
     (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
-  console.log(`single ${type} valu`, value)
+
   useEffect(() => {
     const renderSteps = () => {
       const steps = [];
@@ -41,7 +41,8 @@ const SingleSlider: React.FC<SingleSliderProps> = ({ min, max, type, size, noOfS
               background: i <= value ? "white" : "#47b647",
               zIndex: i <= value ? 2 : 2,
             }}
-          ></div>
+          >{i == 0 && <p className="step-value">{min}</p>}
+            {i == stepSize && <p className="step-value">{max}</p>}</div>
         );
       }
 
@@ -49,7 +50,7 @@ const SingleSlider: React.FC<SingleSliderProps> = ({ min, max, type, size, noOfS
     };
 
     setInputTrackSteps(renderSteps() as any);
-  }, [value, min, max]);
+  }, [value, min, max, noOfSteps]);
 
   useEffect(() => {
     const percent = getPercent(value);

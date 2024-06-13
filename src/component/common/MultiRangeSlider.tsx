@@ -14,7 +14,7 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
   const [minVal, setMinVal] = useState<number>(min);
   const [maxVal, setMaxVal] = useState<number>(max);
   const [inputTrackSteps, setInputTrackSteps] = useState<JSX.Element[]>([]);
-  console.log(`mutirange ${type} min max`, minVal, maxVal);
+
   const range = useRef<HTMLDivElement>(null);
 
   const getPercent = useCallback(
@@ -48,7 +48,10 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
               zIndex:
                 minVal <= i * noOfSteps && i * noOfSteps <= maxVal ? 2 : 2,
             }}
-          ></div>
+          >
+            {i == 0 && <p className="step-value">{min}</p>}
+            {i == stepSize && <p className="step-value">{max}</p>}
+          </div>
         );
       }
 
