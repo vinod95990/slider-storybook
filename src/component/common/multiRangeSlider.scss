@@ -1,0 +1,134 @@
+// Variables
+$slider-width: 100% !important;
+$slider-height: 8px !important;
+$thumb-width: 100% !important;
+$track-color: #f2f3f5;
+$range-color: #47b647;
+$thumb-size-24: 24px;
+$thumb-size-32: 32px;
+$thumb-bg-24: url("/public/default-handle-24.svg") no-repeat center center;
+$thumb-bg-32: url("/public/default-handle-32.svg") no-repeat center center;
+$thumb-hover-bg-24: url("/public/hover-handle-24.svg") no-repeat center center;
+$thumb-hover-bg-32: url("/public/hover-handle-32.svg") no-repeat center center;
+$thumb-focus-bg-24: url("/public/focus-handle-24.svg") no-repeat center center;
+$thumb-focus-bg-32: url("/public/focus-handle-32.svg") no-repeat center center;
+
+// Container
+.container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+}
+
+// Slider
+.slider {
+  position: relative;
+  width: 97% !important;
+  height: 200px;
+
+  &__track,
+  &__range {
+    position: absolute;
+    height: 100%;
+    border-radius: 40px;
+  }
+
+  &__track {
+    background-color: $track-color;
+    width: 100% !important;
+    height: $slider-height;
+    top: 0;
+    left: 0px !important;
+    z-index: 1;
+  }
+
+  &__range {
+    background-color: $range-color;
+    z-index: 2;
+  }
+}
+
+// Thumb
+.thumb,
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.thumb {
+  pointer-events: none;
+  position: absolute;
+  height: 0;
+  width: 100% !important;
+  outline: none;
+
+  &--left {
+    z-index: 3;
+  }
+
+  &--right {
+    z-index: 4;
+  }
+
+  // For Chrome browsers
+  &::-webkit-slider-thumb {
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 4px;
+    z-index: -1;
+    pointer-events: all;
+    position: relative;
+  }
+
+  // For Firefox browsers
+  &::-moz-range-thumb {
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: 4px;
+    pointer-events: all;
+    position: relative;
+  }
+}
+
+// Thumb size 24
+.thumb-size-24 {
+  &::-webkit-slider-thumb {
+    height: $thumb-size-24;
+    width: $thumb-size-24;
+    background: $thumb-bg-24;
+    background-size: contain;
+  }
+
+  &:hover::-webkit-slider-thumb {
+    background: $thumb-hover-bg-24;
+    background-size: contain;
+  }
+
+  &:focus::-webkit-slider-thumb {
+    background: $thumb-focus-bg-24;
+    background-size: contain;
+  }
+}
+
+// Thumb size 32
+.thumb-size-32 {
+  &::-webkit-slider-thumb {
+    height: $thumb-size-32;
+    width: $thumb-size-32;
+    background: $thumb-bg-32;
+    background-size: contain;
+  }
+
+  &:hover::-webkit-slider-thumb {
+    background: $thumb-hover-bg-32;
+    background-size: contain;
+  }
+
+  &:focus::-webkit-slider-thumb {
+    background: $thumb-focus-bg-32;
+    background-size: contain;
+  }
+}
