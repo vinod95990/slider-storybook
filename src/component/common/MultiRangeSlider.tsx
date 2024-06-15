@@ -135,7 +135,7 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
               step={noOfSteps}
               onChange={(event) => {
                 if (maxVal - Number(event.target.value) >= noOfSteps) {
-                  const value = Math.min(Number(event.target.value), maxVal - 4);
+                  const value = Math.min(Number(event.target.value), maxVal - noOfSteps);
 
                   if (onSlide) onSlide({ event, minValue: value, maxValue: maxVal });
 
@@ -156,7 +156,7 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, type, siz
 
                 if (Number(event.target.value) - minVal >= noOfSteps) {
 
-                  const value = Math.max(Number(event.target.value), minVal + 4);
+                  const value = Math.max(Number(event.target.value), minVal + noOfSteps);
                   if (onSlide) onSlide({ event, minValue: minVal, maxValue: value });
 
                   setMaxVal(value);
